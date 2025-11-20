@@ -1,0 +1,41 @@
+@CP.Portal.Api_HostAddress = http://localhost:5000
+
+
+GET {{CP.Portal.Api_HostAddress}}/api/movies
+Accept: application/json
+
+###
+
+# Create movie
+POST {{CP.Portal.Api_HostAddress}}/api/movies
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "New Movie4",
+  "releaseYear": "2024-01-01",
+  "durationMinutes": 120,
+  "language": "en",
+  "price": 9.99,
+  "originalTitle": "Original New Movie",
+  "description": "A sample movie created via HTTP file."
+}
+
+###
+
+# Update movie price
+PUT {{CP.Portal.Api_HostAddress}}/api/movies/019aa1cc-31ba-7552-a649-78e4ebe5494e/price
+Content-Type: application/json
+Accept: application/json
+
+{
+  "newPrice": 14.99
+}
+
+###
+
+# Delete movie
+DELETE {{CP.Portal.Api_HostAddress}}/api/movies/019aa289-22f0-70a2-a98c-f4289b2108fb
+Accept: application/json
+
+###

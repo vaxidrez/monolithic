@@ -1,0 +1,115 @@
+########################################
+# .NET / Visual Studio
+########################################
+
+# Build results
+bin/
+obj/
+out/
+artifacts/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Visual Studio workspace
+.vs/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Tooling
+*.psess
+*.vsp
+*.vspx
+*.pidb
+*.svclog
+*.pdb
+
+# Backup & temp files
+*_i.c
+*_p.c
+*_h.h
+*.tmp
+*.log
+*.bak
+*.old
+*.orig
+*.cache
+*.swp
+*.DS_Store
+
+# NuGet
+*.nupkg
+**/packages/*
+# Except build artifacts from packages
+!**/packages/build/
+*.snk
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Entity Framework
+Migrations/*Designer.cs
+*_Snapshot.cs
+
+########################################
+# Docker & Docker Compose
+########################################
+
+# Docker build artifacts
+**/docker-compose.override.yml
+**/docker-compose.*.yml
+docker-compose.override.yml
+
+# Docker context & temp build
+**/.docker/
+.docker/
+docker/  
+docker-compose-debug.yml
+docker-compose.release.yml
+
+# Ignore intermediate Docker layers
+**/Dockerfile.*.tmp
+
+# Local environment variables (DO NOT COMMIT)
+.env
+.env.development
+.env.local
+.env.*.local
+
+########################################
+# Logs
+########################################
+
+*.log
+logs/
+**/Logs/
+**/logs/
+
+########################################
+# OS-specific junk files
+########################################
+
+# macOS
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.cache/
