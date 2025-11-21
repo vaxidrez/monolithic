@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Movies.Module\src\CP.Portal.Movies.Module\CP.Portal.Movies.Module.csproj" />
+		<ProjectReference Include="..\..\..\Users.Module\src\CP.Portal.Users.Module\CP.Portal.Users.Module.csproj" />
 	</ItemGroup>
 
 

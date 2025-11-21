@@ -1,3 +1,4 @@
+using CP.Core.Contracts.Core;
 using CP.Portal.Movies.Module.Data;
 using CP.Portal.Movies.Module.Services;
 
@@ -18,6 +19,24 @@ public class CreateMovieRequest
     // Optional by domain model
     public string? OriginalTitle { get; set; }
     public string Description { get; set; } = string.Empty; // maps to Movie.Synopsis
+}
+
+// Validator se ejecutará automáticamente por ValidationEndpointFilter
+public sealed class CreateMovieRequestValidator : IValidator<CreateMovieRequest>
+{
+    public IEnumerable<ValidationError> Validate(CreateMovieRequest req)
+    {
+        if (string.IsNullOrWhiteSpace(req.Title))
+            yield return new ValidationError(nameof(req.Title), "Title is required.");
+        if (string.IsNullOrWhiteSpace(req.Description))
+            yield return new ValidationError(nameof(req.Description), "Description is required.");
+        if (req.DurationMinutes <= 0)
+            yield return new ValidationError(nameof(req.DurationMinutes), "DurationMinutes must be > 0.");
+        if (string.IsNullOrWhiteSpace(req.Language))
+            yield return new ValidationError(nameof(req.Language), "Language is required.");
+        if (req.Price < 0m)
+            yield return new ValidationError(nameof(req.Price), "Price cannot be negative.");
+    }
 }
 
 public static class MovieExtensions
@@ -59,7 +78,7 @@ public static class MovieExtensions
 
 
 
-public class CreateMovieEndpoint(IMovieService movieService) : Endpoint<CreateMovieRequest>
+public class CreateMovieEndpoint(IMovieService movieService) : ValidatedEndpoint<CreateMovieRequest>
 {
     private readonly IMovieService _movieService = movieService;
 
@@ -69,17 +88,17 @@ public class CreateMovieEndpoint(IMovieService movieService) : Endpoint<CreateMo
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(CreateMovieRequest req, CancellationToken ct)
+    // Updated to match ValidatedEndpoint<TRequest> template method name
+    protected override async Task OnValidatedAsync(CreateMovieRequest req, CancellationToken ct)
     {
         var movie = req.ToMovie();
-
         await _movieService.CreateMovieAsync(movie);
 
         await Send.CreatedAtAsync<GetMovieByIdEndpoint>(
-           new { Id = movie.MovieId },
-           movie.ToMovieResponse(),
-           cancellation: ct
-       );
+            new { Id = movie.MovieId },
+            movie.ToMovieResponse(),
+            cancellation: ct
+        );
     }
 }
 
@@ -133,7 +152,7 @@ public class ListMoviesEndpoint(IMovieService movieService)
 
         var response = new ListMoviesResponse
         {
-            Movies = moviesResponse 
+            Movies = moviesResponse
         };
 
         await Send.OkAsync(response, ct);
