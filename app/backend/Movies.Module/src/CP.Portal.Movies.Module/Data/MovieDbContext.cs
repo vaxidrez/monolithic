@@ -7,7 +7,7 @@ namespace CP.Portal.Movies.Module.Data;
 
 public class MovieDbContext : DbContext
 {
-    public MovieDbContext(DbContextOptions options) : base(options) { }
+    public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options) { }
 
     public DbSet<Movie> Movies { get; set; } = null!;
     public DbSet<Genre> Genres { get; set; } = null!;

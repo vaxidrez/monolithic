@@ -12,13 +12,13 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "title": "",
+  "title": "tyest",
   "releaseYear": "2024-01-01",
   "durationMinutes": 120,
   "language": "en",
   "price": 9.99,
   "originalTitle": "Original New Movie",
-  "description": ""
+  "description": "desc"
 }
 
 ###
@@ -37,5 +37,16 @@ Accept: application/json
 # Delete movie
 DELETE {{CP.Portal.Api_HostAddress}}/api/movies/019aa289-22f0-70a2-a98c-f4289b2108fb
 Accept: application/json
+
+###
+
+POST {{CP.Portal.Api_HostAddress}}/api/cart
+Content-Type: application/json
+Accept: application/json
+
+{
+  "movieId": "019aa1cc-31bb-72af-9e2b-09af865e6c66",
+  "quantity": 2
+}
 
 ###
