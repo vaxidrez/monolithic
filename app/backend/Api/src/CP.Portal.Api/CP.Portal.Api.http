@@ -50,3 +50,44 @@ Accept: application/json
 }
 
 ###
+
+
+
+# Create user (registration)
+POST {{CP.Portal.Api_HostAddress}}/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "new.user@example.com",
+  "password": "NetUniversity@90"
+}
+
+###
+
+# @name Login
+POST {{CP.Portal.Api_HostAddress}}/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "new.user@example.com",
+  "password": "NetUniversity@90"
+}
+
+###
+
+@bearerToken = {{Login.response.body.$.token}}
+
+# Add item to cart
+POST {{CP.Portal.Api_HostAddress}}/api/cart
+Accept: text/plain
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "movieId": "019aa1cc-31bb-72af-9e2b-09af865e6c66",
+  "quantity": 2
+}
+
+###

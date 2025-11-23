@@ -1,6 +1,7 @@
 
 
 using System.Reflection;
+using System.Text;
 
 using CP.Portal.Api.Middleware;
 using CP.Portal.Movies.Module;
@@ -10,7 +11,9 @@ using CP.Portal.Users.Module.Data;
 
 using FastEndpoints;
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 using Serilog;
 
@@ -34,8 +37,34 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddFastEndpoints();
 
+var jwtSecret = builder.Configuration["Auth:JwtSecret"]!;
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = key,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+
+
 
 var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Aplicar migraciones automáticamente al inicio
 await using (var scope = app.Services.CreateAsyncScope())
@@ -59,8 +88,8 @@ app.UseFastEndpoints(config =>
 });
 
 
-app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseMiddleware<ExceptionMiddleware>();
 
 
 app.Run();

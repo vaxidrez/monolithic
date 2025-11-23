@@ -20,14 +20,13 @@ internal class AddMovie : Endpoint<AddCartMovieRequest>
     public override void Configure()
     {
         Post("/api/cart");
-        AllowAnonymous();
-        //Claims("EmailAddress");
+        Claims("EmailAddress");
     }
 
     public override async Task HandleAsync(AddCartMovieRequest request,
       CancellationToken cancellationToken)
     {
-        var emailAddress = User.FindFirstValue("EmailAddress") ?? "vaxi.drez@gmail.com";
+        var emailAddress = User.FindFirstValue("EmailAddress");
         
         var command = new AddMovieToCartCommand(request.MovieId, request.Quantity, emailAddress!);
 

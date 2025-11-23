@@ -24,13 +24,6 @@ public static class UsersModuleExtensions
 
         string? connectionString = config.GetConnectionString("UsersConnectionString");
 
-        //services.AddDbContext<UserDbContext>(opt =>
-        //{
-        //    opt.UseNpgsql(connectionString)
-        //       .UseSnakeCaseNamingConvention();
-
-        //});
-
 
         services.AddDbContext<UserDbContext>(opt =>
         {
@@ -85,8 +78,8 @@ public static class UsersModuleExtensions
         // if using MediatR in this module, add any assemblies that contain handlers to the list
         mediatRAssemblies.Add(typeof(UsersModuleExtensions).Assembly);
         services.AddMediatOR(typeof(UsersModuleExtensions).Assembly);
-        
 
+        logger.Information("{Module} module services registered", "Users");
 
         return services;
     }
