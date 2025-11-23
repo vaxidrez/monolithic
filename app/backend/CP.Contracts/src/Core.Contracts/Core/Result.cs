@@ -19,7 +19,7 @@ public class Result<T> : IResult
 
     public IEnumerable<string> Errors { get; protected set; } = new List<string>();
 
-    public List<ValidationError> ValidationErrors { get; protected set; } = new List<ValidationError>();
+    public List<ResultValidationError> ValidationErrors { get; protected set; } = new List<ResultValidationError>();
 
     protected Result()
     {
@@ -98,7 +98,7 @@ public class Result<T> : IResult
         };
     }
 
-    public static Result<T> Invalid(ValidationError validationError)
+    public static Result<T> Invalid(ResultValidationError validationError)
     {
         return new Result<T>(ResultStatus.Invalid)
         {
@@ -106,15 +106,15 @@ public class Result<T> : IResult
         };
     }
 
-    public static Result<T> Invalid(params ValidationError[] validationErrors)
+    public static Result<T> Invalid(params ResultValidationError[] validationErrors)
     {
         return new Result<T>(ResultStatus.Invalid)
         {
-            ValidationErrors = new List<ValidationError>(validationErrors)
+            ValidationErrors = new List<ResultValidationError>(validationErrors)
         };
     }
 
-    public static Result<T> Invalid(List<ValidationError> validationErrors)
+    public static Result<T> Invalid(List<ResultValidationError> validationErrors)
     {
         return new Result<T>(ResultStatus.Invalid)
         {
@@ -228,7 +228,7 @@ public class Result : Result<Result>
         };
     }
 
-    public new static Result Invalid(ValidationError validationError)
+    public new static Result Invalid(ResultValidationError validationError)
     {
         return new Result(ResultStatus.Invalid)
         {
@@ -236,15 +236,15 @@ public class Result : Result<Result>
         };
     }
 
-    public new static Result Invalid(params ValidationError[] validationErrors)
+    public new static Result Invalid(params ResultValidationError[] validationErrors)
     {
         return new Result(ResultStatus.Invalid)
         {
-            ValidationErrors = new List<ValidationError>(validationErrors)
+            ValidationErrors = new List<ResultValidationError>(validationErrors)
         };
     }
 
-    public new static Result Invalid(List<ValidationError> validationErrors)
+    public new static Result Invalid(List<ResultValidationError> validationErrors)
     {
         return new Result(ResultStatus.Invalid)
         {
