@@ -52,8 +52,20 @@ Accept: application/json
 ###
 
 
+# Create user FAIL(registration)
+POST {{CP.Portal.Api_HostAddress}}/api/users
+Content-Type: application/json
+Accept: application/json
 
-# Create user (registration)
+{
+  "email": "",
+  "password": ""
+}
+
+###
+
+
+# Create user SUCCESS (registration)
 POST {{CP.Portal.Api_HostAddress}}/api/users
 Content-Type: application/json
 Accept: application/json

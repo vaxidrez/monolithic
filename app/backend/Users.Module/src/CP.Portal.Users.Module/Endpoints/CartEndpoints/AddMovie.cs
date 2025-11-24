@@ -1,12 +1,13 @@
 using System.Security.Claims;
 
 using Core.MediatOR.Contracts;
+using Core.Results;
 
 using CP.Portal.Users.Module.UseCases;
 
 using FastEndpoints;
 
-namespace CP.Portal.Users.Module.Endpoints;
+namespace CP.Portal.Users.Module.Endpoints.CartEndpoints;
 
 internal class AddMovie : Endpoint<AddCartMovieRequest>
 {
@@ -32,16 +33,13 @@ internal class AddMovie : Endpoint<AddCartMovieRequest>
 
         var result = await _mediator!.Send(command, cancellationToken);
 
-        await Send.OkAsync();
-
-
-        //if (result.Status == ResultStatus.Unauthorized)
-        //{
-        //    await SendUnauthorizedAsync();
-        //}
-        //else
-        //{
-        //    await SendOkAsync();
-        //}
+        if (result.Status == ResultStatus.Unauthorized)
+        {
+            await Send.UnauthorizedAsync();
+        }
+        else
+        {
+            await Send.OkAsync();
+        }
     }
 }

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace CP.Core.Contracts.Core;
+namespace Core.Results;
 
 public class Result<T> : IResult
 {

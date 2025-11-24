@@ -1,6 +1,7 @@
 using Core.MediatOR;
 using Core.MediatOR.Contracts;
 
+using CP.Core.Contracts;
 using CP.Core.Contracts.Core;
 
 using CP.Portal.Movies.Module.Data;
@@ -46,53 +47,33 @@ public static class MovieServiceExtensions
 
         services.AddMediatOR(typeof(MovieServiceExtensions).Assembly);
 
-        // Register the open-generic pipeline behavior explicitly
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-        // Register all IValidator<T> from this assembly (internal/public)
-        //var asm = typeof(MovieServiceExtensions).Assembly;
-        //foreach (var type in asm.GetTypes().Where(t => t.IsClass && !t.IsAbstract))
-        //{
-        //    var validatorInterfaces = type.GetInterfaces()
-        //        .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidator<>))
-        //        .ToArray();
-
-        //    foreach (var itf in validatorInterfaces)
-        //    {
-        //        services.AddScoped(itf, type);
-        //    }
-        //}
 
 
 
         // ✅ Auto-registrar validators
-        var assembly = typeof(MovieServiceExtensions).Assembly;
+        //var assembly = typeof(MovieServiceExtensions).Assembly;
 
-        var validatorTypes = assembly.GetTypes()
-            .Where(t => t.IsClass && !t.IsAbstract &&
-                        t.GetInterfaces().Any(i =>
-                            i.IsGenericType &&
-                            i.GetGenericTypeDefinition() == typeof(IValidator<>)))
-            .ToList();
+        //var validatorTypes = assembly.GetTypes()
+        //    .Where(t => t.IsClass && !t.IsAbstract &&
+        //                t.GetInterfaces().Any(i =>
+        //                    i.IsGenericType &&
+        //                    i.GetGenericTypeDefinition() == typeof(IValidator<>)))
+        //    .ToList();
 
-        Console.WriteLine($"🔍 Registrando {validatorTypes.Count} validators");
+        //Console.WriteLine($"🔍 Registrando {validatorTypes.Count} validators");
 
-        foreach (var validatorType in validatorTypes)
-        {
-            var validatorInterface = validatorType.GetInterfaces()
-                .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidator<>));
+        //foreach (var validatorType in validatorTypes)
+        //{
+        //    var validatorInterface = validatorType.GetInterfaces()
+        //        .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidator<>));
 
-            // Registrar IValidator<TRequest>
-            services.AddScoped(validatorInterface, validatorType);
-            Console.WriteLine($"   ✅ Validator: {validatorType.Name}");
-        }
+        //    // Registrar IValidator<TRequest>
+        //    services.AddScoped(validatorInterface, validatorType);
+        //    Console.WriteLine($"   ✅ Validator: {validatorType.Name}");
+        //}
 
-        // ✅ SOLUCIÓN DEFINITIVA: Registro MANUAL EXPLÍCITO del pre-processor
-        // FastEndpoints 7.1.1 NO puede resolver genéricos cerrados con factory
-    
-
-        // Agrega más si tienes otros endpoints con validación:
-        // services.AddScoped<ValidationPreProcessorInline<UpdateMoviePriceRequest>>();
+        services.AddModuleValidators(typeof(MovieServiceExtensions).Assembly);
 
 
         return services;

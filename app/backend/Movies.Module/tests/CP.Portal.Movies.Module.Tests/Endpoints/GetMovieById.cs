@@ -13,9 +13,9 @@ public class GetMovieById(Fixture fixture) : TestBase<Fixture>
 {
 
     [Theory]
-    [InlineData("11111111-1111-1111-1111-111111111111", "Title A")]
-    [InlineData("22222222-2222-2222-2222-222222222222", "Title B")]
-    [InlineData("33333333-3333-3333-3333-333333333333", "Title C")]
+    [InlineData("019aa1cc-31bb-72af-9e2b-09af865e6c66", "Avatar")]
+    [InlineData("019aa1cc-31bb-7f4c-9923-0baad54e87fb", "Inception")]
+    [InlineData("019aa263-700f-75b9-bd6b-adbd939d08ca", "New Movie")]
     public async Task Get_With_Unknown_Id_Should_Return_404_Async(Guid id, string title)
     {
         var request = new GetMovieByIdRequest { Id = id };

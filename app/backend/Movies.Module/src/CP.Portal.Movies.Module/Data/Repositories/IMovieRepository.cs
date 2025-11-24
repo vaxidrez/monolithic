@@ -1,8 +1,8 @@
 namespace CP.Portal.Movies.Module.Data.Repositories;
 
-public interface IMovieRepository : IReadOnlyMovieRepository
+internal interface IMovieRepository : IReadOnlyMovieRepository
 { 
-    public Task AddAsync(Movie movie);
-    public Task DeleteAsync(Movie movie);
-    public Task SaveChangesAsync();
+    Task AddAsync(Movie movie);
+    Task DeleteAsync(Movie movie);
+    Task SaveChangesAsync();
 }

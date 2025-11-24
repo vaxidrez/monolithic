@@ -7,7 +7,7 @@ using FastEndpoints.Security;
 
 using Microsoft.AspNetCore.Identity;
 
-namespace CP.Portal.Users.Module.Endpoints;
+namespace CP.Portal.Users.Module.Endpoints.UserEndpoints;
 
 internal class UserLoginEndpoint : Endpoint<UserLoginRequest>
 {

@@ -12,5 +12,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\..\libs\Core.MediatOR\Core.MediatOR.csproj" />
+		<ProjectReference Include="..\..\..\..\..\libs\Core.Results\Core.Results.csproj" />
 	</ItemGroup>
 </Project>

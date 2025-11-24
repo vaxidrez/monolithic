@@ -1,6 +1,8 @@
 using Core.MediatOR;
 using Core.MediatOR.Contracts;
 
+using CP.Core.Contracts;
+using CP.Core.Contracts.Core;
 using CP.Portal.Users.Module.Data;
 using CP.Portal.Users.Module.Data.Repositories;
 
@@ -80,6 +82,30 @@ public static class UsersModuleExtensions
         services.AddMediatOR(typeof(UsersModuleExtensions).Assembly);
 
         logger.Information("{Module} module services registered", "Users");
+
+
+        //var assembly = typeof(UsersModuleExtensions).Assembly;
+
+        //var validatorTypes = assembly.GetTypes()
+        //    .Where(t => t.IsClass && !t.IsAbstract &&
+        //                t.GetInterfaces().Any(i =>
+        //                    i.IsGenericType &&
+        //                    i.GetGenericTypeDefinition() == typeof(IValidator<>)))
+        //    .ToList();
+
+        //Console.WriteLine($"🔍 Registrando {validatorTypes.Count} validators");
+
+        //foreach (var validatorType in validatorTypes)
+        //{
+        //    var validatorInterface = validatorType.GetInterfaces()
+        //        .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidator<>));
+
+        //    // Registrar IValidator<TRequest>
+        //    services.AddScoped(validatorInterface, validatorType);
+        //    Console.WriteLine($"   ✅ Validator: {validatorType.Name}");
+        //}
+
+        services.AddModuleValidators(typeof(UsersModuleExtensions).Assembly);
 
         return services;
     }

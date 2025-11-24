@@ -9,12 +9,12 @@ public class MovieDbContext : DbContext
 {
     public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options) { }
 
-    public DbSet<Movie> Movies { get; set; } = null!;
-    public DbSet<Genre> Genres { get; set; } = null!;
-    public DbSet<Person> People { get; set; } = null!;
-    public DbSet<MovieGenre> MovieGenres { get; set; } = null!;
-    public DbSet<MovieCast> MovieCasts { get; set; } = null!;
-    public DbSet<MovieCrew> MovieCrews { get; set; } = null!;
+    internal DbSet<Movie> Movies { get; set; } = null!;
+    internal DbSet<Genre> Genres { get; set; } = null!;
+    internal DbSet<Person> People { get; set; } = null!;
+    internal DbSet<MovieGenre> MovieGenres { get; set; } = null!;
+    internal DbSet<MovieCast> MovieCasts { get; set; } = null!;
+    internal DbSet<MovieCrew> MovieCrews { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -59,7 +59,7 @@ public class MovieDbContext : DbContext
     }
 }
 
-public class MovieConfiguration : IEntityTypeConfiguration<Movie>
+internal class MovieConfiguration : IEntityTypeConfiguration<Movie>
 {
     public void Configure(EntityTypeBuilder<Movie> builder)
     {
@@ -97,7 +97,7 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
     }
 }
 
-public class GenreConfiguration : IEntityTypeConfiguration<Genre>
+internal class GenreConfiguration : IEntityTypeConfiguration<Genre>
 {
     public void Configure(EntityTypeBuilder<Genre> builder)
     {
@@ -116,7 +116,7 @@ public class GenreConfiguration : IEntityTypeConfiguration<Genre>
     }
 }
 
-public class PersonConfiguration : IEntityTypeConfiguration<Person>
+internal class PersonConfiguration : IEntityTypeConfiguration<Person>
 {
     public void Configure(EntityTypeBuilder<Person> builder)
     {
@@ -143,7 +143,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
     }
 }
 
-public class MovieGenreConfiguration : IEntityTypeConfiguration<MovieGenre>
+internal class MovieGenreConfiguration : IEntityTypeConfiguration<MovieGenre>
 {
     public void Configure(EntityTypeBuilder<MovieGenre> builder)
     {
@@ -165,7 +165,7 @@ public class MovieGenreConfiguration : IEntityTypeConfiguration<MovieGenre>
     }
 }
 
-public class MovieCastConfiguration : IEntityTypeConfiguration<MovieCast>
+internal class MovieCastConfiguration : IEntityTypeConfiguration<MovieCast>
 {
     public void Configure(EntityTypeBuilder<MovieCast> builder)
     {
@@ -191,7 +191,7 @@ public class MovieCastConfiguration : IEntityTypeConfiguration<MovieCast>
     }
 }
 
-public class MovieCrewConfiguration : IEntityTypeConfiguration<MovieCrew>
+internal class MovieCrewConfiguration : IEntityTypeConfiguration<MovieCrew>
 {
     public void Configure(EntityTypeBuilder<MovieCrew> builder)
     {

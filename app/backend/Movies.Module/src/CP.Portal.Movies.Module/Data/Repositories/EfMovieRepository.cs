@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CP.Portal.Movies.Module.Data.Repositories;
 
-public class EfMovieRepository : IMovieRepository
+internal class EfMovieRepository : IMovieRepository
 {
     private readonly MovieDbContext _dbContext;
 

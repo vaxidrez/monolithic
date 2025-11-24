@@ -1,7 +1,7 @@
 using Core.MediatOR.Contracts;
 
 using CP.Portal.Users.Module.Data.Repositories;
-using CP.Portal.Users.Module.Endpoints;
+using CP.Portal.Users.Module.Endpoints.CartEndpoints;
 
 namespace CP.Portal.Users.Module.UseCases;
 

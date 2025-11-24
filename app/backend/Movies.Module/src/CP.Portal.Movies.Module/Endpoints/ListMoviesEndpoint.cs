@@ -22,7 +22,7 @@ public class CreateMovieRequest
 }
 
 // Validator se ejecutará automáticamente por ValidationEndpointFilter
-public sealed class CreateMovieRequestValidator : IValidator<CreateMovieRequest>
+internal sealed class CreateMovieRequestValidator : IValidator<CreateMovieRequest>
 {
     public IEnumerable<ValidationError> Validate(CreateMovieRequest req)
     {
@@ -39,7 +39,7 @@ public sealed class CreateMovieRequestValidator : IValidator<CreateMovieRequest>
     }
 }
 
-public static class MovieExtensions
+internal static class MovieExtensions
 {
     extension(CreateMovieRequest req)
     {
@@ -78,7 +78,7 @@ public static class MovieExtensions
 
 
 
-public class CreateMovieEndpoint(IMovieService movieService) : ValidatedEndpoint<CreateMovieRequest>
+internal class CreateMovieEndpoint(IMovieService movieService) : ValidatedEndpoint<CreateMovieRequest>
 {
     private readonly IMovieService _movieService = movieService;
 
@@ -108,7 +108,7 @@ public class GetMovieByIdRequest
     public Guid Id { get; set; }
 }
 
-public class GetMovieByIdEndpoint(IMovieService movieService) : Endpoint<GetMovieByIdRequest, MovieResponse>
+internal class GetMovieByIdEndpoint(IMovieService movieService) : Endpoint<GetMovieByIdRequest, MovieResponse>
 {
     private readonly IMovieService _movieService = movieService;
 
@@ -133,7 +133,7 @@ public class GetMovieByIdEndpoint(IMovieService movieService) : Endpoint<GetMovi
 
 // ========== LIST MOVIES ==========
 
-public class ListMoviesEndpoint(IMovieService movieService)
+internal class ListMoviesEndpoint(IMovieService movieService)
     : EndpointWithoutRequest<ListMoviesResponse>
 {
     private readonly IMovieService _movieService = movieService;
@@ -166,7 +166,7 @@ public class UpdateMoviePriceRequest
     public decimal NewPrice { get; set; }
 }
 
-public class UpdateMoviePriceEndpoint(IMovieService movieService) : Endpoint<UpdateMoviePriceRequest>
+internal class UpdateMoviePriceEndpoint(IMovieService movieService) : Endpoint<UpdateMoviePriceRequest>
 {
     private readonly IMovieService _movieService = movieService;
 
@@ -189,7 +189,7 @@ public class DeleteMovieRequest
     public Guid Id { get; set; }
 }
 
-public class DeleteMovieEndpoint(IMovieService movieService) : Endpoint<DeleteMovieRequest>
+internal class DeleteMovieEndpoint(IMovieService movieService) : Endpoint<DeleteMovieRequest>
 {
     private readonly IMovieService _movieService = movieService;
 

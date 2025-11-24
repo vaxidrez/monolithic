@@ -1,10 +1,10 @@
 using CP.Portal.Movies.Module.Data;
 using CP.Portal.Movies.Module.Data.Repositories;
-using CP.Portal.Movies.Module.Endpoints;
+
 
 namespace CP.Portal.Movies.Module.Services;
 
-public class MovieService : IMovieService
+internal class MovieService : IMovieService
 {
     private readonly IMovieRepository _movieRepository;
 

@@ -2,13 +2,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CP.Portal.Movies.Module.Data;
 
-public interface IReadOnlyMovieRepository
+internal interface IReadOnlyMovieRepository
 {
-    public Task<Movie?> GetByIdAsync(Guid id);
-    public Task<List<Movie>> ListAsync();
+    Task<Movie?> GetByIdAsync(Guid id);
+    Task<List<Movie>> ListAsync();
 }
 
-public class Movie
+internal class Movie
 {
     public Guid MovieId { get; private set; } = Guid.CreateVersion7();
     public string Title { get; private set; } = string.Empty;
@@ -34,7 +34,7 @@ public class Movie
     [NotMapped]
     public IEnumerable<Person> CrewPeople => Crew.Select(c => c.Person);
 
-    public Movie(
+    internal Movie(
         string title,
         DateOnly releaseYear,
         int durationMinutes,
@@ -175,14 +175,14 @@ public class Movie
         }
     }
 }
-public class Genre
+internal class Genre
 {
     public Guid GenreId { get; set; } = Guid.CreateVersion7();
     public string Name { get; set; } = null!;
     public ICollection<MovieGenre> MovieGenres { get; } = new List<MovieGenre>();
 }
 
-public class Person
+internal class Person
 {
     public Guid PersonId { get; set; } = Guid.CreateVersion7();
     public string FullName { get; set; } = null!;
@@ -193,7 +193,7 @@ public class Person
     public ICollection<MovieCrew> CrewCredits { get; } = new List<MovieCrew>();
 }
 
-public class MovieGenre
+internal class MovieGenre
 {
     public Guid MovieId { get; set; }
     public Guid GenreId { get; set; }
@@ -202,7 +202,7 @@ public class MovieGenre
     public Genre Genre { get; set; } = null!;
 }
 
-public class MovieCast
+internal class MovieCast
 {
     public Guid MovieId { get; set; }
     public Guid PersonId { get; set; }
@@ -213,7 +213,7 @@ public class MovieCast
     public Person Person { get; set; } = null!;
 }
 
-public class MovieCrew
+internal class MovieCrew
 {
     public Guid MovieId { get; set; }
     public Guid PersonId { get; set; }
